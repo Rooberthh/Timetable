@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="flex flex-wrap -mx-3">
+      <statisticsCard
+        url="asdasd"
+        text="Amount of Added books"
+      />
+      <statisticsCard
+        url="asdasd"
+        text="Amount of Added books"
+      />
+      <statisticsCard
+        url="asdasd"
+        text="Amount of Added books"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import statisticCard from '../components/StatisticsCard';
 export default {
+
   name: 'home',
   components: {
-    HelloWorld
+    'statisticsCard': statisticCard
   }
 }
 </script>
+
+<style scoped>
+
+</style>

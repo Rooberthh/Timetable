@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-green-500 p-2">
+    <nav class="bg-green-500 p-6 border-b-8 border-green-600 mb-8">
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-white mr-6">
                 <router-link to="/" class="font-semibold text-3xl tracking-tight">Timetable</router-link>

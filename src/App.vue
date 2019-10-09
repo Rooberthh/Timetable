@@ -4,15 +4,19 @@
     <main class="container mx-auto">
       <router-view/>
     </main>
+    <AppFooter></AppFooter>
   </div>
 </template>
 
 <script>
   import AppNav from './components/layout/AppNav';
+  import AppFooter from './components/layout/AppFooter';
+
   export default {
     name: 'app',
     components: {
-      'AppNav': AppNav
+      'AppNav': AppNav,
+      'AppFooter': AppFooter
     }
   }
 
@@ -22,5 +26,7 @@
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fafafa;
+  font-size: 16px;
 }
 </style>
