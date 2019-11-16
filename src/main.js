@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import "./main.css";
+import VModal from 'vue-js-modal'
 
 Vue.config.productionTip = false
 // Global Mixin
@@ -22,6 +23,8 @@ Vue.mixin({
     }
   }
 });
+
+Vue.use(VModal, { dynamic: true, dynamicDefaults: { clickToClose: true } });
 
 new Vue({
   router,

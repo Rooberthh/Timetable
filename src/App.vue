@@ -5,6 +5,7 @@
       <router-view/>
     </main>
     <AppFooter></AppFooter>
+    <modals-container/>
   </div>
 </template>
 
