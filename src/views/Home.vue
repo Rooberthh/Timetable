@@ -2,29 +2,32 @@
   <div class="home">
     <div class="flex flex-wrap -mx-3">
       <statisticsCard
-        url="asdasd"
-        text="Amount of Added books"
+        :url="bookUrl"
+        text="Amount of books"
       />
       <statisticsCard
-        url="asdasd"
-        text="Amount of Added books"
-      />
-      <statisticsCard
-        url="asdasd"
-        text="Amount of Added books"
+        :url="activityUrl"
+        text="Amount of Activities"
       />
     </div>
   </div>
 </template>
 
 <script>
-import statisticCard from '../components/StatisticsCard';
+import statisticsCard from '../components/StatisticsCard';
 export default {
 
   name: 'home',
   components: {
-    'statisticsCard': statisticCard
+    'statisticsCard': statisticsCard
+  },
+  data() {
+    return {
+      bookUrl: this.getGatewayUrl() + "books",
+      activityUrl: this.getGatewayUrl() + "activities"
+    }
   }
+
 }
 </script>
 
