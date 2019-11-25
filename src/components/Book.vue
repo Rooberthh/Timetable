@@ -12,7 +12,7 @@
                     <h3 class="font-bold text-l"> {{ book.title }}</h3>
                     <p> {{ this.Truncate(book.review, 50) }} </p>
                     <div class="my-1">
-                        <i class="fas fa-star text-xl text-yellow-500" v-for="icon in this.book.rating"></i>
+                        <i class="fas fa-star text-xl text-yellow-500" v-for="i in this.book.rating"></i>
                     </div>
                 </div>
             </div>
@@ -29,6 +29,6 @@
 
 <style scoped>
     i {
-     vertical-align: middle;
+        vertical-align: middle;
     }
 </style>
