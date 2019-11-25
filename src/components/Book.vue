@@ -11,8 +11,18 @@
                 <div class="py-5 px-3">
                     <h3 class="font-bold text-l"> {{ book.title }}</h3>
                     <p> {{ this.Truncate(book.review, 50) }} </p>
-                    <div class="my-1">
-                        <i class="fas fa-star text-xl text-yellow-500" v-for="i in this.book.rating"></i>
+                    <div class="my-1 flex justify-between">
+                        <div>
+                            <i class="fas fa-star text-xl text-yellow-500" v-for="i in this.book.rating"></i>
+                        </div>
+                        <div class="flex">
+                            <div class="flex">
+                                <i class="fas fa-edit m-auto" @click="edit"></i>
+                            </div>
+                            <div class="flex">
+                                <i class="fas fa-times m-auto" @click="destroy"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -21,14 +31,46 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         name: "Book",
-        props: ['book']
+        props: ['book'],
+        methods: {
+            edit()  {
+
+            },
+            destroy() {
+                axios.delete(this.getGatewayUrl() + 'books/' + this.book.id)
+                    .then( response => {
+                        this.$emit('deleted', response);
+                    });
+            }
+        }
     }
 </script>
 
 <style scoped>
     i {
+        display: inline-block;
         vertical-align: middle;
+    }
+    .fa-edit {
+        margin: auto;
+        padding: 5px;
+        border-radius: 50% 50%;
+        font-size: 18px;
+    }
+
+    .fa-edit:hover {
+        cursor: pointer;
+    }
+
+    .fa-times {
+        font-size: 22px;
+    }
+
+    .fa-times:hover {
+        cursor: pointer;
+        color: red;
     }
 </style>
