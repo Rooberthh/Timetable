@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label for="file" class="avatar-label btn bg-green-700 text-white">Choose an Image</label>
+        <label for="file" class="btn bg-green-700 text-white">Choose an Image</label>
         <input class="file-input" type="file" name="image_path" accept="image/*" @change="onChange" id="file">
     </div>
 </template>
@@ -31,9 +31,5 @@
         overflow: hidden;
         position: absolute;
         z-index: -1;
-    }
-
-    .avatar-label {
-        cursor: pointer;
     }
 </style>
