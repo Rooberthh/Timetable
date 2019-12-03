@@ -13,7 +13,7 @@
                     <p> {{ this.Truncate(this.item.review, 50) }} </p>
                     <div class="my-1 flex justify-between">
                         <div>
-                            <i class="fas fa-star text-xl text-yellow-500" v-for="i in this.item.rating"></i>
+                            <i class="fas fa-star text-xl text-yellow-500" v-for="i in parseInt(this.item.rating)"></i>
                         </div>
                         <div class="flex">
                             <dropdown>
@@ -109,7 +109,7 @@
                 item: {
                     title: this.book.title,
                     review: this.book.review,
-                    rating: this.book.rating,
+                    rating: parseInt(this.book.rating),
                     genre_id: this.book.genre_id,
                     image_path: this.book.image_path
                 },
