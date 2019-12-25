@@ -35,8 +35,8 @@
                     },
                     {
                         id:2,
-                        text: 'Timetable',
-                        page: '/timetables'
+                        text: 'Calendar',
+                        page: '/calendar'
                     },
                 ]
             }
