@@ -45,7 +45,7 @@
                 loading: false,
                 editing: false,
                 item : {id: '', title: '', startDateTime: '', endDateTime: ''},
-                form: new Form({'name': '', 'startDateTime': '', 'endDateTime': ''})
+                form: new Form({'name': '', 'startDateTime': '', 'endDateTime': ''}),
             }
         },
         methods: {
@@ -83,6 +83,9 @@
             },
             destroy() {
                 this.$modal.hide('event-details');
+
+                flash('Deleting...');
+
                 axios.delete(this.getGatewayUrl() + 'events/' + this.item.id)
                     .catch(error => {
                         console.log(error)

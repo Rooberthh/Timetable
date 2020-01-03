@@ -99,6 +99,8 @@
             destroyEvent(id) {
                 let api = this.$refs.Calendar.getApi();
                 api.getEventById(id).remove();
+
+                flash('Event deleted');
             },
             storeEvent(info) {
                 this.form.name = prompt('Add event name:');

@@ -9,10 +9,18 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUserSecret, faEdit, faTrash)
+library.add(faUserSecret, faEdit, faTrash, faTimes);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+//Global Event Bus
+window.events = new Vue();
+
+window.flash = function(message, level = "default") {
+    console.log(' i ran');
+    window.events.$emit('flash', {message, level});
+};
 
 Vue.config.productionTip = false
 // Global Mixin

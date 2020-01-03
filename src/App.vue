@@ -5,6 +5,7 @@
       <router-view/>
     </main>
     <AppFooter></AppFooter>
+    <flash-message message=""></flash-message>
     <modals-container/>
   </div>
 </template>
@@ -12,12 +13,14 @@
 <script>
   import AppNav from './components/layout/AppNav';
   import AppFooter from './components/layout/AppFooter';
+  import Flash from './components/common/FlashMessage';
 
   export default {
     name: 'app',
     components: {
       'AppNav': AppNav,
-      'AppFooter': AppFooter
+      'AppFooter': AppFooter,
+      'flash-message': Flash
     }
   }
 
