@@ -18,7 +18,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 window.events = new Vue();
 
 window.flash = function(message, level = "default") {
-    console.log(' i ran');
     window.events.$emit('flash', {message, level});
 };
 

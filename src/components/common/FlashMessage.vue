@@ -36,7 +36,6 @@
                 this.flash(message);
             });
         },
-
         methods: {
             flash(data) {
                 if(data){

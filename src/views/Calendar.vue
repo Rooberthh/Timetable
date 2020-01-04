@@ -1,21 +1,35 @@
 <template>
-    <div class="p-4">
+    <section>
         <h1 class="text-3xl font-bold">Calendar</h1>
-        <FullCalendar
-                :selectable="selectable"
-                :editable="editable"
-                :slot-label-format="eventTimeFormat"
-                :event-time-format="eventTimeFormat"
-                :events="events" defaultView="timeGridWeek"
-                :plugins="calendarPlugins"
-                @eventDrop="updateEvent"
-                @eventResize="updateEvent"
-                @eventClick="showDetails"
-                @select="storeEvent"
-                ref="Calendar"
-        />
+        <div class="flex">
+            <div class="w-1/6">
+                <h2 class="text-xl">Frequent events</h2>
+                <ul id="draggable" >
+                    <li v-for="(item, index) in frequentEvents" class="my-3 draggable-item" :data-event="JSON.stringify(item)">
+                        {{ item.title }}
+                    </li>
+                </ul>
+            </div>
+            <div class="w-5/6">
+                <FullCalendar
+                        :selectable="selectable"
+                        :editable="editable"
+                        :slot-label-format="eventTimeFormat"
+                        :event-time-format="eventTimeFormat"
+                        :events="events" defaultView="timeGridWeek"
+                        :plugins="calendarPlugins"
+                        :droppable="droppable"
+                        @eventReceive="dropEvent"
+                        @eventDrop="updateEvent"
+                        @eventResize="updateEvent"
+                        @eventClick="showDetails"
+                        @select="storeEvent"
+                        ref="Calendar"
+                />
+            </div>
+        </div>
         <EventDetails @destroy-event="destroyEvent" @refetch="fetch"></EventDetails>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -23,7 +37,7 @@
     import EventDetails from '../components/modals/EventDetails';
     import timeGridPlugin from '@fullcalendar/timegrid';
     import googleCalendarPlugin from '@fullcalendar/google-calendar';
-    import interactionPlugin from '@fullcalendar/interaction';
+    import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
     import Form from '../components/Form/Form';
     import axios from 'axios';
 
@@ -37,11 +51,13 @@
                 calendarPlugins: [ timeGridPlugin, googleCalendarPlugin, interactionPlugin ],
                 events : [],
                 eventUrl: this.getGatewayUrl() + "events",
+                frequentEvents: [],
                 eventTimeFormat: { // like '14:30'
                     hour: '2-digit',
                     minute: '2-digit',
                     hour12: false
                 },
+                droppable: true,
                 editable: true,
                 selectable: true,
                 form: new Form({'name': '', 'startDateTime': '', 'endDateTime': ''})
@@ -49,9 +65,19 @@
         },
         created() {
             this.fetch();
+
+            this.getFrequentEvents();
+        },
+        mounted() {
+            let el = document.getElementById('draggable');
+
+            new Draggable(el, {
+                itemSelector: '.draggable-item'
+            });
         },
         methods: {
             updateEvent(info) {
+                console.log('dasasddsa');
                 let updatedEvent = info.event;
 
                 let data = {
@@ -110,6 +136,8 @@
                 this.form.startDateTime = info.start;
                 this.form.endDateTime = info.end;
 
+                flash('Adding...');
+
                 this.form.post(this.getGatewayUrl() + 'events')
                     .catch(error => {
                         console.log(error);
@@ -126,8 +154,42 @@
                         let api = this.$refs.Calendar.getApi();
 
                         api.addEvent(event);
+                        flash('Added Event');
                     });
+            },
+            getFrequentEvents() {
+                axios.get(this.eventUrl + '/frequent')
+                    .catch(error => {
+                        console.log(error);
+                    })
+                    .then(response => {
+                        // this.events = response.data;
+                        for (let i = 0; i < response.data.length; i++){
+                            let event = {
+                                'title': response.data[i],
+                                'duration': "01:00"
+                            };
 
+                            this.frequentEvents.push(event);
+                        }
+                    })
+            },
+            dropEvent(info) {
+                let event = info.event;
+
+                this.form.name = event.title;
+                this.form.startDateTime = event.start;
+                this.form.endDateTime = event.end;
+
+                flash('Adding...');
+
+                this.form.post(this.getGatewayUrl() + 'events')
+                    .catch(error => {
+                        console.log(error);
+                    })
+                    .then(() => {
+                        flash('Added Event');
+                    });
             }
         }
     }
@@ -136,4 +198,13 @@
 <style lang='scss'>
     @import '~@fullcalendar/core/main.css';
     @import '~@fullcalendar/timegrid/main.css';
+
+    ul li {
+        display: block;
+        cursor: pointer;
+    }
+
+    .event-item {
+        display: inline-block;
+    }
 </style>

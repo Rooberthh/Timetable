@@ -68,6 +68,10 @@
                 this.editing = !this.editing;
             },
             update() {
+                this.$modal.hide('event-details');
+
+                flash('Updating...');
+
                 this.form.patch(this.getGatewayUrl() + 'events/' + this.item.id)
                     .then(response => {
                         //flash message?
@@ -77,7 +81,7 @@
                         this.item.endDateTime = response.googleEvent.end.dateTime;
 
                         this.$emit('refetch');
-
+                        flash('Updated');
                         this.editing = false;
                     });
             },
