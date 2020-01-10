@@ -5,7 +5,7 @@
             <div class="w-1/6">
                 <h2 class="text-xl">Frequent events</h2>
                 <ul id="draggable" >
-                    <li v-for="(item, index) in frequentEvents" class="my-3 draggable-item" :data-event="JSON.stringify(item)">
+                    <li v-for="(item, index) in frequentEvents" class="my-3 draggable-item fc-event p-2" :data-event="JSON.stringify(item)">
                         {{ item.title }}
                     </li>
                 </ul>
@@ -77,7 +77,6 @@
         },
         methods: {
             updateEvent(info) {
-                console.log('dasasddsa');
                 let updatedEvent = info.event;
 
                 let data = {
@@ -91,7 +90,7 @@
                         console.log(error);
                     })
                     .then(response => {
-                        console.log(response);
+                        flash("Event updated");
                     });
             },
             showDetails(info) {

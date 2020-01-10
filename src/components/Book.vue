@@ -6,22 +6,22 @@
                     <img :src="this.item.image_path" alt="">
                 </div>
                 <div class="flex h-32 bg-green-700" v-else>
-                    <i class="fas fa-book text-5xl m-auto text-white"></i>
+                    <font-awesome-icon :icon="['fas', 'book']" class="m-auto text-6xl text-white"></font-awesome-icon>
                 </div>
                 <div class="py-5 px-3">
                     <h3 class="font-bold text-l"> {{ this.item.title }}</h3>
                     <p> {{ this.Truncate(this.item.review, 50) }} </p>
                     <div class="my-1 flex justify-between">
                         <div>
-                            <i class="fas fa-star text-xl text-yellow-500" v-for="i in parseInt(this.item.rating)"></i>
+                            <font-awesome-icon :icon="['fas', 'star']" class="text-xl text-yellow-500 align-middle" v-for="i in parseInt(this.item.rating)" :key="i"></font-awesome-icon>
                         </div>
                         <div class="flex">
                             <dropdown>
                                 <template v-slot:trigger>
                                     <button class="font-bold text-2xl">...</button>
                                 </template>
-                                <li><a href="#" @click="edit" class="dropdown-item hover:bg-gray-200">Edit</a></li>
-                                <li><a href="#" @click="destroy" class="dropdown-item hover:bg-gray-200">Delete</a></li>
+                                <li><a @click="edit" class="dropdown-item hover:bg-gray-200">Edit</a></li>
+                                <li><a @click="destroy" class="dropdown-item hover:bg-gray-200">Delete</a></li>
                             </dropdown>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <div class="relative">
                             <select id="genre_id" name="genre_id" class="input" v-model="form.genre_id">
                                 <option value="0" selected>Select a genre</option>
-                                <option v-for="(genre, index) in genres" :value="genre.id" v-text="genre.name"></option>
+                                <option v-for="(genre, index) in genres" :key="index" :value="genre.id" v-text="genre.name"></option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -161,22 +161,5 @@
     i {
         display: inline-block;
         vertical-align: middle;
-    }
-    .fa-edit {
-        margin: auto;
-        font-size: 18px;
-    }
-
-    .fa-edit:hover {
-        cursor: pointer;
-    }
-
-    .fa-times {
-        font-size: 22px;
-    }
-
-    .fa-times:hover {
-        cursor: pointer;
-        color: red;
     }
 </style>
