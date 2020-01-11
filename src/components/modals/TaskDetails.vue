@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="card-header flex mb-6">
                     <div class="flex-1">
-                        <input class="w-full font-bold text-l" type="text" v-model="task.title"></input>
+                        <input class="w-full font-bold text-l" type="text" v-model="task.title" @change="update()"></input>
                     </div>
                     <div class="ml-3">
                         <font-awesome-icon @click="close" class="cross text-gray-600 text-xl" :icon="['fas', 'plus']"></font-awesome-icon>
@@ -42,6 +42,7 @@
 
 <script>
     import Objectives from '../Objectives/Objectives'
+    import axios from 'axios';
 
     export default {
         name: "TaskDetails",
@@ -61,6 +62,17 @@
             },
             close() {
                 this.$modal.hide('task-details');
+            },
+            update() {
+                axios.patch(this.getGatewayUrl() + 'tasks/' + this.task.id, this.task)
+                    .then(() => {
+                        flash('Task have been updated');
+
+                        this.$emit('taskUpdated');
+                    })
+                    .catch(error => {
+                        flash(error.message);
+                    });
             }
         }
     }

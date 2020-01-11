@@ -6,7 +6,7 @@
                 <statusBoard :status="status"></statusBoard>
             </div>
         </div>
-        <taskDetails></taskDetails>
+        <taskDetails @taskUpdated="fetch()"></taskDetails>
     </div>
 </template>
 
@@ -31,13 +31,18 @@
                 this.$modal.show('task-details', task);
             });
 
-            axios.get(this.getGatewayUrl() + 'statuses')
-                .then(response => {
-                    this.statuses = response.data;
-                })
-                .catch(error => {
-                    flash(error.message);
-                });
+            this.fetch();
+        },
+        methods: {
+            fetch() {
+                axios.get(this.getGatewayUrl() + 'statuses')
+                    .then(response => {
+                        this.statuses = response.data;
+                    })
+                    .catch(error => {
+                        flash(error.message);
+                    });
+            }
         }
     }
 </script>

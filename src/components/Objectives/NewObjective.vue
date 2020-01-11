@@ -1,7 +1,7 @@
 <template>
-    <div class="p-2 mb-3">
+    <div class="p-2 mb-3 bg-gray-300 rounded">
         <form @submit.prevent="addObjective">
-            <input type="text" placeholder="Add a new Objective..." class="w-full leading-loose" name="body" v-model="body">
+            <input type="text" placeholder="Add a new Objective..." class="w-full leading-loose bg-gray-300" name="body" v-model="body">
         </form>
     </div>
 </template>
