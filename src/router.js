@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Books from "./views/Books";
 import Calendar from "./views/Calendar";
+import Tasks from "./views/TasksView";
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/calendar',
       name: 'calendar',
       component: Calendar
+    },
+    {
+      path: '/tasks',
+      name: 'tasks',
+      component: Tasks
     },
   ]
 })

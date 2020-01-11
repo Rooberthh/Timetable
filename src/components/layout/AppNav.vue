@@ -38,6 +38,11 @@
                         text: 'Calendar',
                         page: '/calendar'
                     },
+                    {
+                        id:3,
+                        text: 'Tasks',
+                        page: '/tasks'
+                    },
                 ]
             }
         }
