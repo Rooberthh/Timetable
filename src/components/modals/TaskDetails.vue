@@ -1,0 +1,77 @@
+<template>
+    <modal name="task-details"
+           height="auto"
+           @before-open="beforeOpen"
+    >
+        <article class="card p-5">
+            <div class="card-body">
+                <div class="card-header flex mb-6">
+                    <div class="flex-1">
+                        <input class="w-full font-bold text-l" type="text" v-model="task.title"></input>
+                    </div>
+                    <div class="ml-3">
+                        <font-awesome-icon @click="close" class="cross text-gray-600 text-xl" :icon="['fas', 'plus']"></font-awesome-icon>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <div class="flex my-3">
+                        <div>
+
+                        </div>
+                        <div class="flex-1 font-bold">
+                            Description
+                        </div>
+                    </div>
+                    <textarea class="w-full p-3 bg-gray-300 rounded textarea" v-model="task.description"></textarea>
+                </div>
+                <div class="mb-6">
+                    <div class="flex my-3">
+                        <div>
+
+                        </div>
+                        <div class="flex-1 font-bold">
+                            Objectives
+                        </div>
+                    </div>
+                    <objectives :task-id="task.id"></objectives>
+                </div>
+            </div>
+        </article>
+    </modal>
+</template>
+
+<script>
+    import Objectives from '../Objectives/Objectives'
+
+    export default {
+        name: "TaskDetails",
+        props: ['name'],
+        components: {
+            Objectives
+        },
+        data() {
+            return {
+                task: {},
+                editing: false,
+            }
+        },
+        methods: {
+            beforeOpen(e) {
+                this.task = e.params;
+            },
+            close() {
+                this.$modal.hide('task-details');
+            }
+        }
+    }
+</script>
+
+<style scoped>
+    .textarea {
+        min-height: 8rem;
+    }
+    .cross {
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
+</style>

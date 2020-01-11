@@ -50,7 +50,7 @@
         },
         methods: {
             updateTask(event, id) {
-                if(event.added){
+                if(event.added) {
                     let task = event.added && event.added.element;
                     if(task)
                     {

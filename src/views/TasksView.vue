@@ -6,17 +6,20 @@
                 <statusBoard :status="status"></statusBoard>
             </div>
         </div>
+        <taskDetails></taskDetails>
     </div>
 </template>
 
 <script>
     import axios from 'axios';
     import statusBoard from '../components/StatusBoard';
+    import taskDetails from '../components/modals/TaskDetails';
 
     export default {
         name: 'tasks',
         components: {
-            statusBoard
+            statusBoard,
+            taskDetails
         },
         data() {
             return {
@@ -24,6 +27,10 @@
             }
         },
         created() {
+            window.events.$on('show-taskDetails', task => {
+                this.$modal.show('task-details', task);
+            });
+
             axios.get(this.getGatewayUrl() + 'statuses')
                 .then(response => {
                     this.statuses = response.data;
