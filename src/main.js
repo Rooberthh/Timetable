@@ -12,8 +12,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUserSecret, faEdit, faTrash, faTimes, faBook, faStar);
+library.add(faUserSecret, faEdit, faTrash, faTimes, faBook, faStar, faPlus);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 //Global Event Bus
 window.events = new Vue();

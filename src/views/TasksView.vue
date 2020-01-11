@@ -2,7 +2,7 @@
     <div>
         <h1 class="text-3xl">Tasks</h1>
         <div class="flex my-3 -px-2">
-            <div class="flex-1 min-h-full bg-gray-300 p-3 rounded mx-2" v-for="(status, index) in statuses" :key="status.id">
+            <div class="flex-1 bg-gray-300 p-3 rounded mx-2 self-start" v-for="(status, index) in statuses" :key="status.id">
                 <statusBoard :status="status"></statusBoard>
             </div>
         </div>
