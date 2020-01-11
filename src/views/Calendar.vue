@@ -87,7 +87,7 @@
 
                 axios.patch(this.getGatewayUrl() + 'events/' + updatedEvent.id, data)
                     .catch(error => {
-                        console.log(error);
+                        flash(error.message);
                     })
                     .then(response => {
                         flash("Event updated");
@@ -139,7 +139,7 @@
 
                 this.form.post(this.getGatewayUrl() + 'events')
                     .catch(error => {
-                        console.log(error);
+                        flash(error.message);
                     })
                     .then(response => {
                         let temp_event = response;
@@ -159,7 +159,7 @@
             getFrequentEvents() {
                 axios.get(this.eventUrl + '/frequent')
                     .catch(error => {
-                        console.log(error);
+                        flash(error.message);
                     })
                     .then(response => {
                         // this.events = response.data;
@@ -184,7 +184,7 @@
 
                 this.form.post(this.getGatewayUrl() + 'events')
                     .catch(error => {
-                        console.log(error);
+                        flash(error.message);
                     })
                     .then(() => {
                         flash('Added Event');

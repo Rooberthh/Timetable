@@ -39,7 +39,7 @@
                                 flash('Task updated');
                             })
                             .catch(error => {
-
+                                flash(error.message);
                             });
                     }
                 }

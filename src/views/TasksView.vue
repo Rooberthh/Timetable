@@ -27,6 +27,9 @@
             axios.get(this.getGatewayUrl() + 'statuses')
                 .then(response => {
                     this.statuses = response.data;
+                })
+                .catch(error => {
+                    flash(error.message);
                 });
         }
     }

@@ -35,6 +35,9 @@
             axios.get(this.bookUrl)
                 .then(response => {
                     this.items = response.data;
+                })
+                .catch(error => {
+                    flash(error.message);
                 });
         }
     }
