@@ -48,6 +48,11 @@
                 }
             }
         },
+        watch: {
+            status: function(status) {
+                this.tasks = status.tasks;
+            }
+        },
         methods: {
             updateTask(event, id) {
                 if(event.added) {

@@ -35,6 +35,9 @@
                     </div>
                     <objectives :task-id="task.id"></objectives>
                 </div>
+                <div class="flex">
+                    <button class="btn ml-auto" type="button" @click="destroy">Delete</button>
+                </div>
             </div>
         </article>
     </modal>
@@ -68,7 +71,18 @@
                     .then(() => {
                         flash('Task have been updated');
 
-                        this.$emit('taskUpdated');
+                        this.$emit('refetch');
+                    })
+                    .catch(error => {
+                        flash(error.message);
+                    });
+            },
+            destroy() {
+                axios.delete(this.getGatewayUrl() + 'tasks/' + this.task.id)
+                    .then(() => {
+                        flash('Task have been deleted');
+
+                        this.$emit('refetch');
                     })
                     .catch(error => {
                         flash(error.message);

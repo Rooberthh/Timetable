@@ -2,7 +2,7 @@
     <div class="bg-white flex shadow-md p-3 my-3 task-card"
         @click="showDetails"
     >
-        <p v-text="this.task.title"></p>
+        <p v-text="title"></p>
     </div>
 </template>
 
@@ -12,8 +12,14 @@
         props: ['task'],
         data() {
             return {
+                title: this.task.title,
                 description: this.task.description,
                 objectives: this.task.objectives
+            }
+        },
+        watch: {
+            task: function(task) {
+                this.title = task.title;
             }
         },
         methods: {

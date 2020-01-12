@@ -6,7 +6,7 @@
                 <statusBoard :status="status"></statusBoard>
             </div>
         </div>
-        <taskDetails @taskUpdated="fetch()"></taskDetails>
+        <taskDetails @refetch="fetch()"></taskDetails>
     </div>
 </template>
 
