@@ -13,8 +13,10 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAlignLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUserSecret, faEdit, faTrash, faTimes, faBook, faStar, faPlus);
+library.add(faUserSecret, faEdit, faTrash, faTimes, faBook, faStar, faPlus, faAlignLeft, faCheckSquare);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 //Global Event Bus
 window.events = new Vue();

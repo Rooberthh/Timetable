@@ -22,7 +22,7 @@
                             Description
                         </div>
                     </div>
-                    <textarea class="w-full p-3 bg-gray-300 rounded textarea" v-model="task.description"></textarea>
+                    <textarea class="w-full p-3 bg-gray-300 rounded textarea" v-model="task.description" @change="update()"></textarea>
                 </div>
                 <div class="mb-6">
                     <div class="flex my-3">

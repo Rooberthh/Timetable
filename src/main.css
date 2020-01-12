@@ -30,6 +30,6 @@
     @apply bg-red-500 text-white;
 }
 
-.card {
-
+.objectivesCompleted {
+    @apply .bg-green-500 .text-white
 }
