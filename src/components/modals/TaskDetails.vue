@@ -80,6 +80,7 @@
             destroy() {
                 axios.delete(this.getGatewayUrl() + 'tasks/' + this.task.id)
                     .then(() => {
+                        this.close();
                         flash('Task have been deleted');
 
                         this.$emit('refetch');
