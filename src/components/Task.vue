@@ -38,19 +38,19 @@
         },
         computed: {
             completeObjectives() {
-                return this.item.objectives.filter(obj => obj.completed === true).length;
+                return (this.item.objectives.filter(obj => obj.completed === true).length);
             },
             totalObjectives() {
-                return this.item.objectives.length;
+                return (this.item.objectives.length);
             },
             completed() {
-                return this.item.objectives.filter(obj => obj.completed === true).length === this.item.objectives.length;
+                return (this.item.objectives.filter(obj => obj.completed === true).length === this.item.objectives.length) && this.item.objectives.length > 0;
             },
             hasObjectives() {
-                return this.item.objectives.length;
+                return (this.item.objectives && this.item.objectives.length > 0);
             },
             hasDescription() {
-                return this.item.description;
+                return (this.item.description);
             },
         }
     }

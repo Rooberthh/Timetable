@@ -198,7 +198,7 @@
     @import '~@fullcalendar/core/main.css';
     @import '~@fullcalendar/timegrid/main.css';
 
-    ul li {
+    .draggable-item {
         display: block;
         cursor: pointer;
     }
