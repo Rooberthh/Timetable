@@ -4,14 +4,14 @@
     >
         <p v-text="item.title"></p>
         <div class="flex">
+            <div v-if="hasDescription" class="text-gray-600 px-2 py-1 text-xs mr-2">
+                <font-awesome-icon :icon="['fas', 'align-left']"></font-awesome-icon>
+            </div>
             <div v-if="hasObjectives" class="text-gray-600 px-2 py-1 rounded text-xs" :class="{objectivesCompleted: completed}">
                 <font-awesome-icon :icon="['fas', 'check-square']"></font-awesome-icon>
                 {{ completeObjectives }}
                 /
                 {{ totalObjectives }}
-            </div>
-            <div v-if="hasDescription" class="text-gray-600 px-2 py-1 text-xs">
-                <font-awesome-icon :icon="['fas', 'align-left']"></font-awesome-icon>
             </div>
         </div>
     </div>
