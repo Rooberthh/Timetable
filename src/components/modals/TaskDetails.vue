@@ -33,7 +33,7 @@
                             Objectives
                         </div>
                     </div>
-                    <objectives :task-id="task.id"></objectives>
+                    <objectives @refetch="refetch" :task-id="task.id"></objectives>
                 </div>
                 <div class="flex">
                     <button class="btn ml-auto" type="button" @click="destroy">Delete</button>
@@ -66,12 +66,15 @@
             close() {
                 this.$modal.hide('task-details');
             },
+            refetch() {
+                this.$emit('refetch');
+            },
             update() {
                 axios.patch(this.getGatewayUrl() + 'tasks/' + this.task.id, this.task)
                     .then(() => {
                         flash('Task have been updated');
 
-                        this.$emit('refetch');
+                        this.refetch();
                     })
                     .catch(error => {
                         flash(error.message);
@@ -83,7 +86,7 @@
                         this.close();
                         flash('Task have been deleted');
 
-                        this.$emit('refetch');
+                        this.refetch();
                     })
                     .catch(error => {
                         flash(error.message);

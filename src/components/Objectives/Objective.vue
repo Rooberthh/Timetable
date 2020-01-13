@@ -30,6 +30,7 @@
                 axios.patch(this.endpoint, this.form)
                     .then(() => {
                         flash('Objective have been updated');
+                        this.$emit('updated');
                     })
                     .catch(error => {
                         flash(error.message);
@@ -39,12 +40,11 @@
                 axios.delete(this.endpoint, this.id)
                     .then(() => {
                         flash('Objective have been deleted');
+                        this.$emit('deleted');
                     })
                     .catch(error => {
                         flash(error.message);
                     });
-
-                this.$emit('deleted');
             }
         },
     }
