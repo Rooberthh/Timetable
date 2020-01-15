@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+  <section class="home">
+    <h2 class="text-3xl">Books & Calendar</h2>
     <div class="flex flex-wrap -mx-3">
       <statisticsCard
         :url="bookUrl"
@@ -17,7 +18,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
