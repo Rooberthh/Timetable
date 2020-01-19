@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import "./main.css"
 import VModal from 'vue-js-modal'
+import moment from 'moment';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
@@ -25,7 +26,8 @@ window.flash = function(message, level = "default") {
     window.events.$emit('flash', {message, level});
 };
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
 // Global Mixin
 Vue.mixin({
   methods: {
@@ -41,6 +43,15 @@ Vue.mixin({
         }
 
         return str.substr(0, str.lastIndexOf(separator, max)) + '...';
+    },
+    getHoursFromMins(mins) {
+        // do not include the first validation check if you want, for example,
+        // getTimeFromMins(1530) to equal getTimeFromMins(90) (i.e. mins rollover)
+        if (mins >= 24 * 60 || mins < 0) {
+            throw new RangeError("Valid input should be greater than or equal to 0 and less than 1440.");
+        }
+
+        return moment.duration(mins, 'minutes').asHours();
     }
   }
 });
