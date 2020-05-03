@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="card-header flex mb-6">
                     <div class="flex-1">
-                        <input class="w-full font-bold text-l" type="text" v-model="task.title" @change="update()"></input>
+                        <input class="w-full font-bold text-l" type="text" v-model="task.title" @change="update()"/>
                     </div>
                     <div class="ml-3">
                         <font-awesome-icon @click="close" class="cross text-gray-600 text-xl" :icon="['fas', 'plus']"></font-awesome-icon>
@@ -49,7 +49,6 @@
 
     export default {
         name: "TaskDetails",
-        props: ['name'],
         components: {
             Objectives
         },
@@ -70,7 +69,7 @@
                 this.$emit('refetch');
             },
             update() {
-                axios.patch(this.getGatewayUrl() + 'tasks/' + this.task.id, this.task)
+                axios.patch(this.getGatewayUrl() + `statuses/${this.task.status_id}/tasks/${this.task.id}`, this.task)
                     .then(() => {
                         flash('Task have been updated');
 
@@ -81,7 +80,7 @@
                     });
             },
             destroy() {
-                axios.delete(this.getGatewayUrl() + 'tasks/' + this.task.id)
+                axios.delete(this.getGatewayUrl() + `statuses/${this.task.status_id}/tasks/${this.task.id}`)
                     .then(() => {
                         this.close();
                         flash('Task have been deleted');

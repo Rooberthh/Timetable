@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Books from "./views/Books";
 import Calendar from "./views/Calendar";
-import Tasks from "./views/TasksView";
+import Boards from "./views/Boards";
+import ShowBoard from "./views/ShowBoard";
 
 Vue.use(Router);
 
@@ -25,9 +26,14 @@ export default new Router({
       component: Calendar
     },
     {
-      path: '/tasks',
-      name: 'tasks',
-      component: Tasks
+      path: '/boards',
+      name: 'boards',
+      component: Boards
+    },
+    {
+      path: '/boards/:id',
+      name: 'show-board',
+      component: ShowBoard
     },
   ]
 })

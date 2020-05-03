@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <AppNav/>
-    <main class="container mx-auto">
+    <main class="container mx-auto min-h-screen">
       <router-view/>
     </main>
     <AppFooter></AppFooter>
