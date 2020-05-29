@@ -4,7 +4,7 @@
             <h3 class="text-lg font-bold" v-text="item.name"></h3>
         </div>
 
-        <draggable class="pb-16" v-model="tasks"  @start="drag=true" @end="drag=false" group="tasks" @change="updateTask($event, id)" v-if="!editing">
+        <draggable class="pb-16" v-model="tasks"  @start="drag=true" @end="drag=false" group="tasks" @change="updateTask($event, item.id)" v-if="!editing">
             <div v-for="task in tasks" :key="task.id">
                 <task :task="task"></task>
             </div>
@@ -108,7 +108,7 @@
                         this.editing = ! this.editing;
                     })
                     .catch(error => {
-                        console.log(error);
+                        flash(error.message);
                     })
             },
             destroy() {
@@ -128,7 +128,7 @@
                     if(task)
                     {
                         task.status_id = id;
-                        let url = this.getGatewayUrl() + 'tasks/' + task.id;
+                        let url = this.getGatewayUrl() + `statuses/${this.status.id}/tasks/${task.id}`;
                         axios.patch(url, task)
                             .then(() => {
                                 flash('Task updated');

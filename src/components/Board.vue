@@ -49,11 +49,12 @@
         methods: {
             destroy() {
                 axios.delete(this.getGatewayUrl() + `boards/${this.id}`)
-                    .then(() => {
-                        this.flash('Board have been deleted');
+                    .then(response => {
+                        this.$emit('deleted', response);
+                        flash('Board have been deleted');
                     })
                     .catch(error => {
-                        this.flash(error);
+                        flash(error.message);
                     })
             }
         }
