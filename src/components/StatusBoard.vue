@@ -4,7 +4,7 @@
             <h3 class="text-lg font-bold" v-text="item.name"></h3>
         </div>
 
-        <draggable class="pb-16" v-model="tasks"  @start="drag=true" @end="drag=false" group="tasks" @change="updateTask($event, item.id)" v-if="!editing">
+        <draggable class="pb-16" v-model="tasks"  @start="drag=true" @end="drag=false" group="tasks" @change="changedTask($event, item.id)" v-if="!editing">
             <div v-for="task in tasks" :key="task.id">
                 <task :task="task"></task>
             </div>
@@ -122,25 +122,36 @@
                         flash(error.message);
                     });
             },
-            updateTask(event, id) {
+            changedTask(event, id) {
                 if(event.added) {
                     let task = event.added && event.added.element;
                     if(task)
                     {
                         task.status_id = id;
-                        let url = this.getGatewayUrl() + `statuses/${this.status.id}/tasks/${task.id}`;
-                        axios.patch(url, task)
-                            .then(() => {
-                                flash('Task updated');
-                            })
-                            .catch(error => {
-                                flash(error.message);
-                            });
+                        this.updateTask(task);
+                    }
+                }
+                if(event.moved) {
+                    let task = event.moved && event.moved.element;
+                    if(task)
+                    {
+                        task.order = event.moved.newIndex;
+                        this.updateTask(task);
                     }
                 }
             },
+            updateTask(task) {
+                let url = this.getGatewayUrl() + `statuses/${this.status.id}/tasks/${task.id}`;
+                axios.patch(url, task)
+                    .then(() => {
+                        flash('Task updated');
+                    })
+                    .catch(error => {
+                        flash(error.message);
+                    });
+            },
             addTask(){
-                let url = this.getGatewayUrl() + `/statuses/${this.id}/tasks` ;
+                let url = this.getGatewayUrl() + `statuses/${this.status.id}/tasks` ;
                 axios.post(url, this.newTask)
                     .then(response => {
                         this.newTask.title = '';
