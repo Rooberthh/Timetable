@@ -135,7 +135,7 @@
                     let task = event.moved && event.moved.element;
                     if(task)
                     {
-                        task.order = event.moved.newIndex;
+                        task.order = event.moved.newIndex + 1;
                         this.updateTask(task);
                     }
                 }
