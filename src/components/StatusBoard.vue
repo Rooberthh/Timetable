@@ -1,15 +1,52 @@
 <template>
     <div class="flex-1 bg-gray-300 p-3 rounded mx-2 self-start border-t-8 draggable" :style="{borderColor: item.color}">
-        <div class="flex justify-between">
-            <h3 class="text-lg font-bold" v-text="item.name"></h3>
-        </div>
-
-        <draggable class="pb-16" v-model="tasks"  @start="drag=true" @end="drag=false" group="tasks" @change="changedTask($event, item.id)" v-if="!editing">
-            <div v-for="task in tasks" :key="task.id">
-                <task :task="task"></task>
+        <div v-if="!editing">
+            <div class="flex">
+                <h3 class="text-lg font-bold mr-auto" v-text="item.name"></h3>
+                <dropdown>
+                    <template v-slot:trigger>
+                        <button class="font-bold text-2xl">...</button>
+                    </template>
+                    <li><a @click="editing = !editing" class="dropdown-item hover:bg-gray-200">Edit</a></li>
+                    <li><a @click="destroy" class="dropdown-item hover:bg-gray-200">Delete</a></li>
+                </dropdown>
             </div>
-        </draggable>
-        <div class="pb-16" v-else>
+
+            <draggable class="pb-16" v-model="tasks"  @start="drag=true" @end="drag=false" group="tasks" @change="changedTask($event, item.id)" v-if="!editing">
+                <div v-for="task in tasks" :key="task.id">
+                    <task :task="task"></task>
+                </div>
+            </draggable>
+            <div class="flex">
+                <div class="flex w-full justify-between" v-if="!adding">
+                    <div class="flex">
+                        <button
+                                type="button"
+                                class="w-full text-left hover:bg-gray-400 p-1 rounded"
+                                @click="adding = !adding"
+                        >
+                            <font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon>
+                            Add Task
+                        </button>
+                    </div>
+                    <dropdown>
+                        <template v-slot:trigger>
+                            <button class="font-bold text-2xl">...</button>
+                        </template>
+                        <li><a @click="editing = !editing" class="dropdown-item hover:bg-gray-200">Edit</a></li>
+                        <li><a @click="destroy" class="dropdown-item hover:bg-gray-200">Delete</a></li>
+                    </dropdown>
+                </div>
+                <div class="flex-grow" v-else>
+                    <textarea class="input w-full" v-model="newTask.title" id="title" placeholder="Task title"></textarea>
+                    <div class="flex justify-between mt-3">
+                        <button @click="addTask" type="button" class="btn btn-primary">Add task</button>
+                        <button @click="adding = !adding" type="button" class="btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
                     Name
@@ -33,35 +70,6 @@
                 </button>
             </div>
         </div>
-
-        <div class="flex">
-            <div class="flex w-full justify-between" v-if="!adding">
-                <div class="flex">
-                    <button
-                            type="button"
-                            class="w-full text-left hover:bg-gray-400 p-1 rounded"
-                            @click="adding = !adding"
-                    >
-                        <font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon>
-                        Add Task
-                    </button>
-                </div>
-                <dropdown>
-                    <template v-slot:trigger>
-                        <button class="font-bold text-2xl">...</button>
-                    </template>
-                    <li><a @click="editing = !editing" class="dropdown-item hover:bg-gray-200">Edit</a></li>
-                    <li><a @click="destroy" class="dropdown-item hover:bg-gray-200">Delete</a></li>
-                </dropdown>
-            </div>
-            <div class="flex-grow" v-else>
-                <textarea class="input w-full" v-model="newTask.title" id="title" placeholder="Task title"></textarea>
-                <div class="flex justify-between mt-3">
-                    <button @click="addTask" type="button" class="btn btn-primary">Add task</button>
-                    <button @click="adding = !adding" type="button" class="btn">Cancel</button>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -83,6 +91,7 @@
                     id: this.status.id,
                     name: this.status.name,
                     color: this.status.color,
+                    board_id: this.status.board_id
                 },
                 tasks: this.status.tasks,
                 adding: false,
@@ -164,6 +173,9 @@
                     .catch(error => {
                         flash(error.message);
                     });
+            },
+            showDetails() {
+                window.events.$emit('show-statusDetails', this.item);
             }
         }
     }
