@@ -55,11 +55,7 @@
                 <span class="text-red-500" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="color">
-                    Color
-                </label>
-                <input class="input" id="color" name="color" type="text" placeholder="Color" v-model="form.color">
-                <span class="text-red-500" v-if="form.errors.has('color')" v-text="form.errors.get('color')"></span>
+                <color-picker name="color" @chosen="setColor"></color-picker>
             </div>
             <div class="flex items-center justify-between">
                 <button class="btn btn-danger" type="button" @click="editing = !editing">
@@ -78,11 +74,12 @@
     import axios from 'axios';
     import task from './Task';
     import dropdown from './common/Dropdown';
+    import colorPicker from './common/ColorPicker';
     import Form from './Form/Form';
 
     export default {
         name: "StatusBoard",
-        components: {draggable, task, dropdown},
+        components: {draggable, task, dropdown, colorPicker},
         props: ['status'],
         data() {
             return {
@@ -176,6 +173,9 @@
             },
             showDetails() {
                 window.events.$emit('show-statusDetails', this.item);
+            },
+            setColor(color) {
+                this.form.color = color;
             }
         }
     }

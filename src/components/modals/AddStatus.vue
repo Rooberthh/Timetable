@@ -11,11 +11,7 @@
                 <span class="text-red-500" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="color">
-                    Color
-                </label>
-                <input class="input" id="color" name="color" type="text" placeholder="Color" v-model="form.color">
-                <span class="text-red-500" v-if="form.errors.has('color')" v-text="form.errors.get('color')"></span>
+                <color-picker name="color" @chosen="setColor"></color-picker>
             </div>
             <div class="flex items-center justify-between">
                 <button class="btn btn-primary" type="button" @click="addStatus">
@@ -28,9 +24,11 @@
 
 <script>
     import Form from '../Form/Form';
+    import ColorPicker from '../common/ColorPicker';
 
     export default {
         props: ['board'],
+        components : {ColorPicker},
         data() {
             return {
                 board_id: 0,
@@ -49,6 +47,9 @@
                         this.$emit('created', response);
                         this.$modal.hide('add-status');
                     });
+            },
+            setColor(color) {
+                this.form.color = color;
             }
         }
     }
