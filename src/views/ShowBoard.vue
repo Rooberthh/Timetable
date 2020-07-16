@@ -2,16 +2,14 @@
     <div>
         <h1 class="text-3xl font-bold" v-text="board.name"></h1>
         <button class="btn btn-primary" type="button" @click="openModal">Add new status</button>
-        <div class="flex my-3 -px-2">
-                <draggable v-model="items" @start="drag=true" @end="drag=false" group="statuses" class="flex" @change="changeStatus($event)">
-                    <statusBoard
-                            v-for="(status, index) in this.items" :key="status.id"
-                            :status="status"
-                            @deleted="remove(index)"
-                            >
-                    </statusBoard>
-                </draggable>
-        </div>
+        <draggable v-model="items" @start="drag=true" @end="drag=false" group="statuses" class="flex my-3 -px-2" @change="changeStatus($event)">
+                <statusBoard
+                        v-for="(status, index) in this.items" :key="status.id"
+                        :status="status"
+                        @deleted="remove(index)"
+                        >
+                </statusBoard>
+        </draggable>
         <taskDetails @refetch="fetch()"></taskDetails>
         <addStatus :board="this.board" @created="add"></addStatus>
     </div>
@@ -55,11 +53,22 @@
             changeStatus(event) {
                 if(event.moved) {
                     let status = event.moved && event.moved.element;
-                    if(status)
-                    {
-                        status.order = event.moved.newIndex + 1;
-                        this.updateStatus(status);
+
+                    this.items.map((status, index) => {
+                        status.order = index + 1;
+                    });
+
+                    if(status) {
+                        let url = this.getGatewayUrl() + `boards/${this.board.id}/statuses`;
+                        axios.patch(url, {statuses: this.items})
+                            .then(() => {
+                                flash('Statuses updated');
+                            })
+                            .catch(error => {
+                                flash(error.message);
+                            });
                     }
+
                 }
             },
             updateStatus(status) {

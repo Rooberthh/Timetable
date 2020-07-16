@@ -138,12 +138,11 @@
                     }
                 }
                 if(event.moved) {
-                    let task = event.moved && event.moved.element;
-                    if(task)
-                    {
-                        task.order = event.moved.newIndex + 1;
-                        this.updateTask(task);
-                    }
+                    this.tasks.map((task, index) => {
+                        task.order = index + 1;
+                    });
+
+                    this.updateAllTasks();
                 }
             },
             updateTask(task) {
@@ -151,6 +150,16 @@
                 axios.patch(url, task)
                     .then(() => {
                         flash('Task updated');
+                    })
+                    .catch(error => {
+                        flash(error.message);
+                    });
+            },
+            updateAllTasks() {
+                let url = this.getGatewayUrl() + `statuses/${this.status.id}/tasks`;
+                axios.patch(url, {tasks: this.tasks})
+                    .then(() => {
+                        flash('Tasks updated');
                     })
                     .catch(error => {
                         flash(error.message);
