@@ -55,7 +55,7 @@
                 <span class="text-red-500" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
             </div>
             <div class="mb-4">
-                <color-picker name="color" @chosen="setColor"></color-picker>
+                <color-picker :default-color="this.status.color" name="color" @chosen="setColor"></color-picker>
             </div>
             <div class="flex items-center justify-between">
                 <button class="btn btn-danger" type="button" @click="editing = !editing">

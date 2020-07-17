@@ -25,11 +25,11 @@
 
 <script>
     export default {
-        props: ['colors'],
+        props: ['defaultColor'],
         data() {
             return {
                 isOpen: false,
-                chosenColor: "#1abc9c",
+                chosenColor: (this.defaultColor) ? this.defaultColor : "#1abc9c",
                 swatches: ["#1abc9c", "#16a085", "#2ecc71", "#27ae60", "#3498db", "#2980b9", "#f1c40f", "#f39c12"],
             }
         },
