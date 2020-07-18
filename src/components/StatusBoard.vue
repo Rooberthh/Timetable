@@ -106,7 +106,7 @@
         },
         methods: {
             updateStatus() {
-                let url = this.getGatewayUrl() + `/boards/${this.board_id}/statuses/${this.item.id}` ;
+                let url = this.getGatewayUrl() + `boards/${this.board_id}/statuses/${this.item.id}` ;
                 this.form.patch(url)
                     .then(response => {
                         this.item = response;
@@ -118,7 +118,7 @@
                     })
             },
             destroy() {
-                let url = this.getGatewayUrl() + `/boards/${this.board_id}/statuses/${this.item.id}` ;
+                let url = this.getGatewayUrl() + `boards/${this.board_id}/statuses/${this.item.id}` ;
                 axios.delete(url)
                     .then(() => {
                         flash('Status have been deleted');
