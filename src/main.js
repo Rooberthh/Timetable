@@ -17,8 +17,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faAlignLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { faStream } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUserSecret, faEdit, faTrash, faTimes, faBook, faStar, faPlus, faAlignLeft, faCheckSquare, faStream);
+library.add(faUserSecret, faEdit, faTrash, faTimes, faBook, faStar, faPlus, faAlignLeft, faCheckSquare, faStream, faAngleDown);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 //Global Event Bus
 window.events = new Vue();

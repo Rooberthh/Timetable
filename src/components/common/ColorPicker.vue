@@ -25,11 +25,11 @@
 
 <script>
     export default {
-        props: ['defaultColor'],
+        props: ['activeColor'],
         data() {
             return {
                 isOpen: false,
-                chosenColor: (this.defaultColor) ? this.defaultColor : "#1abc9c",
+                chosenColor: (this.activeColor) ? this.activeColor : "#1abc9c",
                 swatches: ["#1abc9c", "#16a085", "#2ecc71", "#27ae60", "#3498db", "#2980b9", "#f1c40f", "#f39c12"],
             }
         },
@@ -38,6 +38,9 @@
                 if(isOpen) {
                     document.addEventListener('click', this.closeIfClickedOutside);
                 }
+            },
+            activeColor(color) {
+                this.setColor(color);
             }
         },
         methods: {

@@ -12,25 +12,25 @@
                 <span class="text-red-500" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
             </div>
             <div class="mb-4">
-                <color-picker name="color" @chosen="setColor"></color-picker>
+                <color-picker name="color" :active-color="this.form.color" @chosen="setColor"></color-picker>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="favorite">
                     Add as favorite
                 </label>
                 <input id="favorite" name="favorite" type="checkbox" v-model="form.favorite">
             </div>
             <div class="mb-4" v-if="favoriteStatuses.length > 0">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="favorite">
-                    Favorites
-                </label>
-                <select @change="selectFavoriteStatus">
-                    <option v-for="status in this.favoriteStatuses" :key="status.name" class="flex p-5">
-                        <div class="w-4 h-4" :style="{backgroundColor: status.color}">
+                <dropdown>
+                    <template v-slot:trigger>
+                        <button class="">Favorites <font-awesome-icon :icon="['fas', 'angle-down']"></font-awesome-icon></button>
+                    </template>
+                    <li role="button" tabindex="0" class="flex items-center p-1" @click="selectFavoriteStatus(status)" v-for="status in favoriteStatuses" :key="status.id">
+                        <div class="w-4 h-4 mr-2" :style="{backgroundColor: status.color}">
                         </div>
                         {{ status.name }}
-                    </option>
-                </select>
+                    </li>
+                </dropdown>
             </div>
             <div class="flex items-center justify-between">
                 <button class="btn btn-primary" type="button" @click="addStatus">
@@ -45,10 +45,11 @@
     import Form from '../Form/Form';
     import ColorPicker from '../common/ColorPicker';
     import axios from 'axios';
+    import dropdown from '../common/Dropdown'
 
     export default {
         props: ['board'],
-        components : {ColorPicker},
+        components : {ColorPicker, dropdown},
         data() {
             return {
                 favoriteStatuses: [],
@@ -87,5 +88,4 @@
 </script>
 
 <style scoped>
-
 </style>
