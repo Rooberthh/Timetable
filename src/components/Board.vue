@@ -7,7 +7,7 @@
                     <font-awesome-icon :icon="['fas', 'stream']" class="m-auto text-6xl text-white"></font-awesome-icon>
                 </div>
                 <div class="py-5 px-3">
-                    <h2 class="font-bold text-xl"> {{ this.form.name }}</h2>
+                    <h2 class="font-bold text-xl"> {{ this.name }}</h2>
                     <div class="my-1 flex justify-between">
                         <div class="flex flex-wrap">
                             <div class="pill font-bold text-white mr-1 my-1 text-xs" :style="{backgroundColor: s.color}" v-for="(s, index) in statuses" :key="s.id">
@@ -78,8 +78,9 @@
             },
             update() {
                 this.form.patch(this.getGatewayUrl() + `boards/${this.id}`)
-                    .then(() => {
+                    .then(response => {
                         flash('Board have been updated');
+                        this.name = response.name;
                         this.editing = false;
                     })
                     .catch(error => {

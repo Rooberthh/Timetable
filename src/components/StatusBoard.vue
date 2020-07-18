@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-1 bg-gray-300 p-3 rounded mx-2 self-start border-t-8 draggable" :style="{borderColor: item.color}">
+    <div class="status-board draggable" :style="{borderColor: item.color}">
         <div v-if="!editing">
             <div class="flex">
                 <h3 class="text-lg font-bold mr-auto" v-text="item.name"></h3>
@@ -55,7 +55,7 @@
                 <span class="text-red-500" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
             </div>
             <div class="mb-4">
-                <color-picker :active-color="this.form.color" name="color" @chosen="setColor"></color-picker>
+                <color-picker :default-color="this.form.color" name="color" @chosen="setColor"></color-picker>
             </div>
             <div class="flex items-center justify-between">
                 <button class="btn btn-danger" type="button" @click="editing = !editing">
@@ -203,5 +203,13 @@
     .draggable:hover {
         cursor: pointer;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .status-board {
+        @apply flex-1 bg-gray-300 p-3 rounded self-start border-t-8;
+    }
+
+    .status-board + .status-board {
+        @apply ml-4;
     }
 </style>
