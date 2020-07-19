@@ -21,16 +21,14 @@
                 <input id="favorite" name="favorite" type="checkbox" v-model="form.favorite">
             </div>
             <div class="mb-4" v-if="favoriteStatuses.length > 0">
-                <dropdown>
-                    <template v-slot:trigger>
-                        <button class="">Favorites <font-awesome-icon :icon="['fas', 'angle-down']"></font-awesome-icon></button>
-                    </template>
-                    <li role="button" tabindex="0" class="flex items-center p-1" @click="selectFavoriteStatus(status)" v-for="status in favoriteStatuses" :key="status.id">
+                <p class="mb-2 font-bold text-gray-700 text-sm">Favorites</p>
+                <ul class="flex">
+                    <li role="button" tabindex="0" class="flex pill" :style="{borderStyle: status.color}" @click="selectFavoriteStatus(status)" v-for="status in favoriteStatuses" :key="status.id">
                         <div class="w-4 h-4 mr-2" :style="{backgroundColor: status.color}">
                         </div>
                         {{ status.name }}
                     </li>
-                </dropdown>
+                </ul>
             </div>
             <div class="flex items-center justify-between">
                 <button class="btn btn-primary" type="button" @click="addStatus">
@@ -88,4 +86,7 @@
 </script>
 
 <style scoped>
+    .pill {
+        @apply .items-center .p-2 .border-2;
+    }
 </style>
