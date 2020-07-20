@@ -4,6 +4,8 @@ import router from './router'
 import "./main.css"
 import VModal from 'vue-js-modal'
 import moment from 'moment';
+import store from './store/index';
+import axios from 'axios';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
@@ -61,6 +63,14 @@ Vue.mixin({
 Vue.use(VModal, { dynamic: true, dynamicDefaults: { clickToClose: true } });
 
 new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+    router,
+    store,
+    created () {
+        const userInfo = localStorage.getItem('user');
+        if (userInfo) {
+            const userData = JSON.parse(userInfo);
+            this.$store.commit('setUserData', userData);
+        }
+    },
+    render: h => h(App),
+}).$mount('#app');

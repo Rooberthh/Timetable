@@ -34,6 +34,6 @@ export default new Router({
       path: '/boards/:id',
       name: 'show-board',
       component: ShowBoard
-    },
+    }
   ]
 })

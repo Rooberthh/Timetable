@@ -4,7 +4,7 @@
             <div class="text-white mr-6">
                 <router-link to="/" class="font-semibold text-3xl tracking-tight">Timetable</router-link>
             </div>
-            <div class="flex items-center mr-auto">
+            <div class="flex mr-auto">
                 <router-link v-for="route in routes"
                              :key="route.id"
                              :to="route.page"
@@ -13,13 +13,21 @@
                     {{ route.text }}
                 </router-link>
             </div>
+            <div class="flex ml-auto">
+                <button  class="mr-6 text-white font-bold" @click="showLoginModal">Login</button>
+                <button class="mr-6 text-white font-bold" @click="logout">Logout</button>
+            </div>
         </div>
+        <login-modal></login-modal>
     </nav>
 </template>
 
 <script>
+    import LoginModal from '../modals/Login';
+
     export default {
         name: "AppNav",
+        components: {LoginModal},
         data() {
             return {
                 routes: [
@@ -45,7 +53,16 @@
                     },
                 ]
             }
-        }
+        },
+        methods: {
+            logout() {
+              this.$store.dispatch('logout');
+            },
+            showLoginModal() {
+                this.$modal.show('login');
+            }
+
+        },
     }
 </script>
 
