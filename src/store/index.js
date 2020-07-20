@@ -17,7 +17,7 @@ export default new Vuex.Store({
         },
         clearUserData () {
             localStorage.removeItem('user');
-            location.reload()
+            location.reload();
         }
     },
     actions: {
@@ -25,12 +25,20 @@ export default new Vuex.Store({
             return axios
                 .post(process.env.VUE_APP_GATEWAY + 'login', credentials)
                 .then(({ data }) => {
-                    commit('setUserData', data)
+                    commit('setUserData', data);
+                    location.reload();
                 })
         },
         logout ({ commit }) {
             commit('clearUserData')
-        }
+        },
+        register ({ commit }, credentials) {
+            return axios
+                .post(process.env.VUE_APP_GATEWAY + 'users', credentials)
+                .then(() => {
+                    flash(`Your account have been created`);
+                })
+        },
     },
     getters: {
         isLoggedIn: state => !!state.user

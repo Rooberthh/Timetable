@@ -14,20 +14,24 @@
                 </router-link>
             </div>
             <div class="flex ml-auto">
-                <button  class="mr-6 text-white font-bold" @click="showLoginModal">Login</button>
-                <button class="mr-6 text-white font-bold" @click="logout">Logout</button>
+                <button  class="mr-6 text-white font-bold" @click="showLoginModal" v-if="!this.isLoggedIn">Login</button>
+                <button  class="mr-6 text-white font-bold" @click="showRegisterModal" v-if="!this.isLoggedIn">Register</button>
+                <button class="mr-6 text-white font-bold" @click="logout" v-if="this.isLoggedIn">Logout</button>
             </div>
         </div>
-        <login-modal></login-modal>
+        <login-modal v-if="!this.isLoggedIn"></login-modal>
+        <register-modal v-if="!this.isLoggedIn"></register-modal>
     </nav>
 </template>
 
 <script>
     import LoginModal from '../modals/Login';
+    import RegisterModal from '../modals/RegisterModal';
+    import { mapGetters } from 'vuex'
 
     export default {
         name: "AppNav",
-        components: {LoginModal},
+        components: {LoginModal, RegisterModal},
         data() {
             return {
                 routes: [
@@ -60,9 +64,16 @@
             },
             showLoginModal() {
                 this.$modal.show('login');
+            },
+            showRegisterModal() {
+                this.$modal.show('register');
             }
-
         },
+        computed: {
+            isLoggedIn() {
+                return this.$store.getters.isLoggedIn;
+            }
+        }
     }
 </script>
 
