@@ -47,7 +47,7 @@
                         this.items = response.data.statuses;
                     })
                     .catch(error => {
-                        this.flash(error.message);
+                        flash(error.message);
                     });
             },
             changeStatus(event) {

@@ -26,11 +26,12 @@ export default new Vuex.Store({
                 .post(process.env.VUE_APP_GATEWAY + 'login', credentials)
                 .then(({ data }) => {
                     commit('setUserData', data);
-                    location.reload();
+                    flash(`Welcome ${data.user.name}`);
                 })
         },
         logout ({ commit }) {
-            commit('clearUserData')
+            commit('clearUserData');
+            location.reload();
         },
         register ({ commit }, credentials) {
             return axios
@@ -41,6 +42,7 @@ export default new Vuex.Store({
         },
     },
     getters: {
-        isLoggedIn: state => !!state.user
+        isLoggedIn: state => !!state.user,
+        userId: state => state.user.user.id
     }
 });
