@@ -20,12 +20,13 @@
                     "on":false
                 };
                 let times = 0;
+                let ref = this;
                 let cuddle = setInterval(function(){
 
                     if(times % 2 === 0) {
-                        this.setOfficeLamp(lightOn);
+                        ref.setOfficeLamp(lightOn);
                     } else {
-                        this.setOfficeLamp(lightOff);
+                        ref.setOfficeLamp(lightOff);
                     }
                     times++;
                     if(times === 10){
