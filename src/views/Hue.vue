@@ -22,14 +22,14 @@
                 let times = 0;
                 let ref = this;
                 let cuddle = setInterval(function(){
-
+                    times++;
                     if(times % 2 === 0) {
                         ref.setOfficeLamp(lightOn);
                     } else {
                         ref.setOfficeLamp(lightOff);
                     }
-                    times++;
-                    if(times === 10){
+
+                    if(times === 10 * 2){
                         clearInterval(cuddle);
                     }
                 }, 1000);
