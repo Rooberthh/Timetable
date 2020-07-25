@@ -9,6 +9,14 @@
 <script>
     import axios from 'axios';
     export default {
+        data() {
+            return {
+                base: `https://${process.env.VUE_APP_HUE_BRIDGE_IP}/api/${process.env.VUE_APP_HUE_USER}/lights/7/state`,
+            }
+        },
+        created() {
+            this.getLights();
+        },
         methods: {
             setOfficeRed() {
                 let lightOn = {
@@ -41,6 +49,9 @@
                 }).catch(error => {
                     console.log(error);
                 });
+            },
+            getLights() {
+
             }
         },
     }

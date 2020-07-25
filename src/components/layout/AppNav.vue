@@ -5,13 +5,14 @@
                 <router-link to="/" class="font-semibold text-3xl tracking-tight">Timetable</router-link>
             </div>
             <div class="flex mr-auto">
-                <router-link v-for="route in routes"
+                <router-link v-show="isLoggedIn" v-for="route in routes"
                              :key="route.id"
                              :to="route.page"
                              class="mr-6 text-white font-bold"
                 >
                     {{ route.text }}
                 </router-link>
+                <router-link to="/hue" class="mr-6 text-white font-bold">Hue</router-link>
             </div>
             <div class="flex ml-auto">
                 <button  class="mr-6 text-white font-bold" @click="showLoginModal" v-if="!this.isLoggedIn">Login</button>
@@ -38,7 +39,8 @@
                     {
                       id:0,
                       text: 'Home',
-                      page: '/'
+                      page: '/',
+                        auth: false
                     },
                     {
                         id:1,
@@ -54,11 +56,6 @@
                         id:3,
                         text: 'Boards',
                         page: '/boards'
-                    },
-                    {
-                        id:4,
-                        text: 'Hue',
-                        page: '/hue'
                     },
                 ]
             }
