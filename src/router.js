@@ -5,6 +5,7 @@ import Books from "./views/Books";
 import Calendar from "./views/Calendar";
 import Boards from "./views/Boards";
 import ShowBoard from "./views/ShowBoard";
+import Hue from "./views/Hue";
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/boards/:id',
       name: 'show-board',
       component: ShowBoard
+    },
+    {
+      path: '/hue',
+      name: 'hue',
+      component: Hue
     }
   ]
 })

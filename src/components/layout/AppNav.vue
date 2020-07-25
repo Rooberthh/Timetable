@@ -55,6 +55,11 @@
                         text: 'Boards',
                         page: '/boards'
                     },
+                    {
+                        id:4,
+                        text: 'Hue',
+                        page: '/hue'
+                    },
                 ]
             }
         },
