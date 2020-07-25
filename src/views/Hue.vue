@@ -11,33 +11,36 @@
     export default {
         methods: {
             setOfficeRed() {
-                let url = `https://${process.env.VUE_APP_HUE_BRIDGE_IP}/api/${process.env.VUE_APP_HUE_USER}/lights/7/state`;
-                let data = {
+                let lightOn = {
                     "on":true,
                     "xy":[0.675,0.322],
                     "bri": 254
                 };
+                let lightOff = {
+                    "on":false
+                };
                 let times = 0;
                 let cuddle = setInterval(function(){
-                    times++;
 
                     if(times % 2 === 0) {
-                        axios.put(url, data).then(() => {
-                        }).catch(error => {
-                            console.log(error);
-                        });
+                        this.setOfficeLamp(lightOn);
                     } else {
-                        axios.put(url, data).then(() => {
-                        }).catch(error => {
-                            console.log(error);
-                        });
+                        this.setOfficeLamp(lightOff);
                     }
-
+                    times++;
                     if(times === 10){
                         clearInterval(cuddle);
                     }
-                }, 500);
+                }, 1000);
             },
+            setOfficeLamp(data) {
+                let url = `https://${process.env.VUE_APP_HUE_BRIDGE_IP}/api/${process.env.VUE_APP_HUE_USER}/lights/7/state`;
+
+                axios.put(url, data).then(() => {
+                }).catch(error => {
+                    console.log(error);
+                });
+            }
         },
     }
 </script>
