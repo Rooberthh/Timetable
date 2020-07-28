@@ -12,7 +12,6 @@
                 >
                     {{ route.text }}
                 </router-link>
-                <router-link to="/hue" class="mr-6 text-white font-bold">Hue</router-link>
             </div>
             <div class="flex ml-auto">
                 <button  class="mr-6 text-white font-bold" @click="showLoginModal" v-if="!this.isLoggedIn">Login</button>
@@ -56,6 +55,11 @@
                         id:3,
                         text: 'Boards',
                         page: '/boards'
+                    },
+                    {
+                        id:4,
+                        text: 'Hue',
+                        page: '/hue'
                     },
                 ]
             }
